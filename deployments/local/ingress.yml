@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-cloud-platform-ingress
+  annotations:
+    external-dns.alpha.kubernetes.io/set-identifier: hello-cloud-platform-ingress-aaf-dev-green
+    external-dns.alpha.kubernetes.io/aws-weight: "100"
+spec:
+  ingressClassName: default
+  tls:
+    - hosts:
+        - aaf-dev-local.apps.live.cloud-platform.service.justice.gov.uk
+  rules:
+    - host: aaf-dev-local.apps.live.cloud-platform.service.justice.gov.uk
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: hello-cloud-platform-service # this should match the metadata.name in service.yml
+                port:
+                  number: 8080
