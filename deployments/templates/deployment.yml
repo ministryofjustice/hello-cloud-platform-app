@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-deployment
+  name: hello-cloud-platform-deployment
   labels:
-    app: example
+    app: hello-cloud-platform
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: example # this should match the selector in service.yml
+      app: hello-cloud-platform # this should match the selector in service.yml
   template:
     metadata:
       labels:
-        app: example # this should match the selector in service.yml
+        app: hello-cloud-platform # this should match the selector in service.yml
     spec:
       containers:
-        - name: example
+        - name: hello-cloud-platform
           image: ${REGISTRY}/${REPOSITORY}:${IMAGE_TAG}
           ports:
             - containerPort: 8080
